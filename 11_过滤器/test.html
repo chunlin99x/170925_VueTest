@@ -22,11 +22,28 @@
 <!--需求: 对当前时间进行指定格式显示-->
 <div id="test">
   <h2>显示格式化的日期时间</h2>
+  <p>{{myData}}</p>
+  <p>{{myData | dataFormat}}</p>
+  <p>{{myData | dataFormat('YYYY-MM-DD')}}</p>
+  <p>{{myData | dataFormat('HH:mm:ss')}}</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.20.1/moment.js"></script>
 <script>
 
+  // 定义过滤器
+  Vue.filter('dataFormat', function (value, format='YYYY-MM-DD HH:mm:ss') { // 2018-02-13 13:23:05
+    return moment(value).format(format)
+    // return moment(value).format(format || 'YYYY-MM-DD HH:mm:ss')
+  })
+
+  new Vue({
+    el: '#test',
+    data: {
+      myData: new Date()
+    }
+  })
 </script>
 </body>
 </html>
